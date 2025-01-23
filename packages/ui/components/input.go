@@ -5,10 +5,11 @@ import (
 )
 
 type Input struct {
-	name  string
-	x, y  int
-	w int
-	max   int
+	name string
+	x, y int
+	w    int
+	max  int
+	View *gocui.View
 }
 
 func (i *Input) Layout(ui *gocui.Gui) error {
@@ -20,6 +21,9 @@ func (i *Input) Layout(ui *gocui.Gui) error {
 		v.Editor = i
 		v.Editable = true
 	}
+
+	i.View = v
+
 	return nil
 }
 
@@ -47,4 +51,3 @@ func SetFocus(name string) func(g *gocui.Gui) error {
 func NewInput(name string, x, y, w, max int) *Input {
 	return &Input{name: name, x: x, y: y, w: w, max: max}
 }
-
